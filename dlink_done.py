@@ -1,0 +1,146 @@
+class node:
+    def __init__(self,d):
+        self.d=d
+        self.prev=None
+        self.next=None
+class dlink:
+    def __init__(self):
+        self.h=None
+    def addf(self,d):
+        new=node(d)
+        if self.h is None:
+            self.h=new
+            return
+        new.next=self.h
+        self.h=new
+        self.h.prev=new
+        print(d,"added")
+    def adde(self,d):
+        new=node(d)
+        if self.h is None:
+            self.h=new
+            return
+        n=self.h
+        while n.next is not None:
+            n=n.next
+        new.prev=n
+        n.next=new
+        print(d,"added")
+    def addbfr(self,x,d):
+        if self.h is None:
+            print("linked list is empty")
+            return
+        new=node(d)
+        if self.h.d==x:
+            new.next=self.h
+            self.h=new
+            self.h.prev=new
+            return
+        n=self.h
+        while n.next is not None:
+            if n.next.d==x:
+                break
+            n=n.next
+        if n.next is None:
+            print("data not found")
+        else:
+            
+            new.prev=n
+            new.next=n.next
+            n.next=new
+            n.next.prev=new
+        print("data added")
+    def addaf(self,x,d):
+        if self.h is None:
+            print("linked list is empty")
+            return
+        new=node(d)
+        n=self.h
+        while n is not None:
+            if n.d==x:
+                break
+            n=n.next
+        if n is None:
+            print("data not found")
+        elif n.next is None:
+            new.prev=n
+            n.next=new
+        else:
+            new.next=n.next
+            new.prev=n
+            n.next=new
+            n.next.prev=new
+        print("data added")
+    def disp(self):
+        if self.h is None:
+            print("empty")
+            return
+        n=self.h
+        while n is not None:
+            print(n.d,"-->",end=" ")
+            n=n.next
+    def delt(self,x):
+        if self.h is None:
+            print("linked list is empty")
+            return
+        if self.h.d==x:
+            self.h=self.h.next
+            return
+        
+        n=self.h
+        while n is not None:
+            if n.d==x:
+                break
+            n=n.next
+        if n is None:
+            print("data not found")
+        elif n.next is None:
+            n.prev.next=None
+        else:
+            n.prev.next=n.next
+            n.next.prev=n.prev
+        print("data deleted",x)
+    def dispb(self):
+        if self.h is None:
+            print("linked list is empty")
+            return
+        n=self.h
+        while n.next is not None:
+            n=n.next
+        while n is not None:
+            print(n.d,"-->",end=" ")
+            n=n.prev
+s=dlink()
+while True:
+    print("\n1.add\n2.add end\n3.add before\n4.add AFTER\n5.display \n6.display backward\n7.delete\n8.Quit")
+    n=int(input("enter your choice"))
+    if n==1:
+        d=int(input("enter data"))
+        s.addf(d)
+    elif n==2:
+        d=int(input("enter data"))
+        s.adde(d)
+    elif n==3:
+        x=int(input("enter postion value"))
+        d=int(input("enter data"))
+        s.addbfr(x,d)
+    elif n==4:
+         x=int(input("enter postion value"))
+         d=int(input("enter data"))
+         s.addaf(x,d)
+    elif n==5:
+        s.disp()
+    elif n==6:
+        s.dispb()
+    elif n==7:
+        d=int(input("enter data"))
+        s.delt(d)
+    elif n==8:
+        break
+        
+    else:
+        print("invalid")
+            
+            
+        
+            
